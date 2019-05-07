@@ -21,16 +21,16 @@
     register: network
     
   - name: vpc subnet is present
-   ec2_vpc_subnet:
-      region: "{{ ec2_region }}"
-      state: present
-      cidr: "{{ ec2_subnetcidr }}"
-      az: "{{ ec2_region }}{{ ec2_az }}"
-      resource_tags:
-        tool: ansible
-        Name: "{{ ec2_stack_name }}-subnet-{{ ec2_az }}"
-      vpc_id: "{{ network.vpc.id }}"
-   register: vpc_subnet
+    ec2_vpc_subnet:
+       region: "{{ ec2_region }}"
+       state: present
+       cidr: "{{ ec2_subnetcidr }}"
+       az: "{{ ec2_region }}{{ ec2_az }}"
+       resource_tags:
+         tool: ansible
+         Name: "{{ ec2_stack_name }}-subnet-{{ ec2_az }}"
+       vpc_id: "{{ network.vpc.id }}"
+    register: vpc_subnet
 
   - name: vpc internet gateway is present
     ec2_vpc_igw:
