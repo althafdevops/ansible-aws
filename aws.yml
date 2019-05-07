@@ -8,8 +8,9 @@
      ec2_subnetcidr: 10.251.1.0/24
      ec2_region: "eu-west-1"
      ec2_az: a
-     ec2_stack_name: 1
+     ec2_exact_count: 1
      ec2_key_name: "project1"
+     
      
      
   tasks:
@@ -75,7 +76,7 @@
         cidr_ip: 0.0.0.0/0
        
   - name: search for latest centos7 ami
-    ec2_ami_find:
+    ec2_ami_facts:
       owner: "410186602215"
       region: "{{ ec2_region }}"
       name: "CentOS Linux 7 x86_64 HVM EBS"
