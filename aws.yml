@@ -87,7 +87,7 @@
       key_name: "{{ ec2_key_name }}"
       group: "{{ ec2_stack_name }}-webservers" 
       volumes: 
-      - device_name: /dev/sda1
+      - device_name: /dev/xvda
         volume_type: gp2
         volume_size: 8
         delete_on_termination: true
