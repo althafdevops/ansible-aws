@@ -9,9 +9,30 @@
   - name: vpc is present
     ec2_vpc_net:
       state: present
-      region: eu-west-2
+      region: eu-west-1
       cidr_block: "{{ ec2_vpcidr }}"
       name: "project1-vpc"
       tags:
         tool: ansible  
-    register: vpc
+    register: network
+    
+  - name: vpc subnet is present
+   ec2_vpc_subnet:
+      region: "{{ ec2_region }}"
+      state: present
+      cidr: "{{ ec2_subnetcidr }}"
+      az: "{{ ec2_region }}{{ ec2_az }}"
+      resource_tags:
+        tool: ansible
+        Name: "{{ ec2_stack_name }}-subnet-{{ ec2_az }}"
+      vpc_id: "{{ network.vpc.id }}"
+   register: vpc_subnet
+
+  - name: vpc internet gateway is present
+    ec2_vpc_igw:
+       region: "{{ ec2_region }}"
+       vpc_id: "{{ network.vpc.id }}"
+       state: present
+    register: igw 
+   
+    
