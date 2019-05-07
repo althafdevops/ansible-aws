@@ -76,7 +76,7 @@
         cidr_ip: 0.0.0.0/0
        
   - name: search for latest centos7 ami
-    ec2_ami_facts:
+    ec2_ami_find:
       owner: "410186602215"
       region: "{{ ec2_region }}"
       name: "CentOS Linux 7 x86_64 HVM EBS"
