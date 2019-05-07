@@ -93,7 +93,7 @@
         delete_on_termination: true
       vpc_subnet_id: "{{ vpc_subnet.subnet.id }}"
       instance_type: t2.micro
-      image: "{{ find_results.results[0].ami_id }}"
+      image: ami-08eb05c142193af92
       wait: true
       region: "{{ ec2_region }}"
       exact_count: "{{ ec2_exact_count }}"
