@@ -49,7 +49,7 @@
      tags:
         Name "{{ ec2_stack_name }}-public"
      subnets:
-       -"{{ vpc_subnet.subnet.id }}"
+       - "{{ vpc_subnet.subnet.id }}"
      routes:
        - dest: 0.0.0.0/0
          gateway_id: "{{ igw.gateway_id }}"
