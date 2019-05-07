@@ -56,23 +56,23 @@
          
   - name: vpc security group is present
     ec2_group:
-    name: "{{ ec2_stack_name }}-webservers"
-    region: "{{ ec2_region }}"
-    desription: SSH and HTTP/HTTPS
-    vpc_id: "{{ network.vpc.id }}"
-    rules:
-     - proto: tcp
-       from_port: 22
-       to_port: 22
-       cidr_ip: 0.0.0.0/0
-     - proto: tcp
-       from_port: 80
-       to_port: 80
-       cidr_ip: 0.0.0.0/0
-     - port: tcp
-       from_port: 443
-       to_port: 443
-       cidr_ip: 0.0.0.0/0
+     name: "{{ ec2_stack_name }}-webservers"
+     region: "{{ ec2_region }}"
+     desription: SSH and HTTP/HTTPS
+     vpc_id: "{{ network.vpc.id }}"
+     rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr_ip: 0.0.0.0/0
+      - port: tcp
+        from_port: 443
+        to_port: 443
+        cidr_ip: 0.0.0.0/0
        
   - name: search for latest centos7 ami
     ec2_ami_find:
