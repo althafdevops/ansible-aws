@@ -58,7 +58,7 @@
     ec2_group:
      name: "{{ ec2_stack_name }}-webservers"
      region: "{{ ec2_region }}"
-     desription: SSH and HTTP/HTTPS
+     description: SSH and HTTP/HTTPS
      vpc_id: "{{ network.vpc.id }}"
      rules:
       - proto: tcp
