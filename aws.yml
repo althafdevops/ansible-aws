@@ -1,0 +1,17 @@
+---
+- name: server are provisioned in vpc
+  hosts: localhost
+  gather_facts: false
+  vars:
+     ec2_vpcidr: 10.251.0.0/16
+     
+  tasks:
+  - name: vpc is present
+    ec2_vpc_net:
+      state: present
+      region: eu-west-2
+      cidr_block: "{{ ec2_vpcidr }}"
+      name: "project1-vpc"
+      tags:
+        tool: ansible  
+    register: network
