@@ -57,7 +57,7 @@
          
   - name: vpc security group is present
     ec2_group:
-     name: "{{ ec2_stack_name }}-webservers"
+     name: "{{ ec2_stack_name }}-dockerswarm"
      region: "{{ ec2_region }}"
      description: SSH and HTTP/HTTPS
      vpc_id: "{{ network.vpc.id }}"
@@ -85,7 +85,7 @@
   - name: provision ec2 with exact count variable
     ec2:
       key_name: "{{ ec2_key_name }}"
-      group: "{{ ec2_stack_name }}" 
+      group: "{{ ec2_stack_name }}-dockerswarm" 
       volumes: 
       - device_name: /dev/xvda
         volume_type: gp2
@@ -108,7 +108,7 @@
   - name: provision ec2 with exact count variable
     ec2:
       key_name: "{{ ec2_key_name }}"
-      group: "{{ ec2_stack_name }}" 
+      group: "{{ ec2_stack_name }}-dockerswarm" 
       volumes: 
       - device_name: /dev/xvda
         volume_type: gp2
