@@ -100,7 +100,7 @@
       count_tag:
         Count: dockerswarm-master
       instance_tags:
-        Name: "{{ ec2_stack_name }}"
+        Name: dockerswarm-master
         Count: "{{ ec2_stack_name }}"
       assign_public_ip: true
     register: ec2-dockerswarm-master   
@@ -123,7 +123,7 @@
       count_tag:
         Count: dockerswarm-nodes
       instance_tags:
-        Name: "{{ ec2_stack_name }}"
+        Name: dockerswarm-nodes
         Count: "{{ ec2_stack_name }}"
       assign_public_ip: true
     register: ec2-dockerswarm-node
