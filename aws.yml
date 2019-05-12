@@ -98,7 +98,7 @@
       region: "{{ ec2_region }}"
       exact_count: 1
       count_tag:
-        Count: "{{ ec2_stack_name }}"
+        Name: dockerswarm-master
       instance_tags:
         Name: "{{ ec2_stack_name }}"
         Count: "{{ ec2_stack_name }}"
@@ -121,7 +121,7 @@
       region: "{{ ec2_region }}"
       exact_count: "{{ ec2_exact_count }}"
       count_tag:
-        Count: "{{ ec2_stack_name }}"
+        Name: dockerswarm-nodes
       instance_tags:
         Name: "{{ ec2_stack_name }}"
         Count: "{{ ec2_stack_name }}"
@@ -152,4 +152,4 @@
     add_host:
       name: "{{ item.public_ip }}"
       groups: docker-swarm-master
-    with_items: "{{ ec2-dockerswarm-master.instances }}"   
+    with_items: "{{ ec2-dockerswarm-master.instances }}"     
