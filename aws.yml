@@ -85,7 +85,7 @@
   - name: provision ec2 with exact count variable
     ec2:
       key_name: "{{ ec2_key_name }}"
-      group: "{{ ec2_stack_name }}" 
+      group: "{{ ec2_stack_name }}-dockerswarm-master" 
       volumes: 
       - device_name: /dev/xvda
         volume_type: gp2
@@ -98,7 +98,7 @@
       region: "{{ ec2_region }}"
       exact_count: 1
       count_tag:
-        Name: dockerswarm-master
+        Count: dockerswarm-master
       instance_tags:
         Name: "{{ ec2_stack_name }}"
         Count: "{{ ec2_stack_name }}"
@@ -108,7 +108,7 @@
   - name: provision ec2 with exact count variable
     ec2:
       key_name: "{{ ec2_key_name }}"
-      group: "{{ ec2_stack_name }}" 
+      group: "{{ ec2_stack_name }}-dockerswarm-node" 
       volumes: 
       - device_name: /dev/xvda
         volume_type: gp2
@@ -121,7 +121,7 @@
       region: "{{ ec2_region }}"
       exact_count: "{{ ec2_exact_count }}"
       count_tag:
-        Name: dockerswarm-nodes
+        Count: dockerswarm-nodes
       instance_tags:
         Name: "{{ ec2_stack_name }}"
         Count: "{{ ec2_stack_name }}"
