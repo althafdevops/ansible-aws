@@ -103,7 +103,7 @@
         Name: dockerswarm-master
         Count: "{{ ec2_stack_name }}"
       assign_public_ip: true
-    register: ec2-dockerswarm-master   
+    register: ec2_dockerswarm_master   
 
   - name: provision ec2 with exact count variable
     ec2:
@@ -126,30 +126,30 @@
         Name: dockerswarm-nodes
         Count: "{{ ec2_stack_name }}"
       assign_public_ip: true
-    register: ec2-dockerswarm-node
+    register: ec2_dockerswarm_node
 
   - name: Wait for SSH to come up
     wait_for:
       host: "{{ item.public_ip }}"
       port: 22 
       state: started 
-    with_items: "{{ ec2-dockerswarm-node.instances }}"  
+    with_items: "{{ ec2_dockerswarm_node.instances }}"  
 
   - name: Wait for SSH to come up
     wait_for:
       host: "{{ item.public_ip }}"
       port: 22 
       state: started 
-    with_items: "{{ ec2-dockerswarm-master.instances }}"    
+    with_items: "{{ ec2_dockerswarm_master.instances }}"    
 
   - name: Add the newly created dockerswarm-node
     add_host:
       name: "{{ item.public_ip }}"
       groups: docker-swarm-node
-    with_items: "{{ ec2-dockerswarm-node.instances }}"  
+    with_items: "{{ ec2_dockerswarm_node.instances }}"  
 
   - name: Add the newly created dockerswarm-master 
     add_host:
       name: "{{ item.public_ip }}"
       groups: docker-swarm-master
-    with_items: "{{ ec2-dockerswarm-master.instances }}"     
+    with_items: "{{ ec2_dockerswarm_master.instances }}"     
