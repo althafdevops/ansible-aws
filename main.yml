@@ -1,0 +1,8 @@
+---
+- name: server are provisioned in vpc
+  hosts: localhost
+  gather_facts: false
+     
+  tasks:
+  - import_tasks: docker-swarm-cluster.yml
+  - import_tasks: docker-swarm-configure.yml 
