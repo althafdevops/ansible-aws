@@ -1,0 +1,41 @@
+---
+  - name: execute shell command
+    shell: hostname
+  
+  - name: ec2
+    user:
+       name: ec2-user
+    register: user_info
+  
+  - name: install docker-py using pip
+    pip:
+      name: docker-py
+      
+  - name: install docker using yum
+    yum:
+      name: docker
+      state: present
+
+  - name: start docker service
+    service:
+      name: docker
+      state: started
+ 
+  - name: Init a new swarm with default parameters
+    docker_swarm:
+      advertise_addr: "{{ item }}"
+      state: present
+    with_items: "{{ groups['docker-swarm-master'] }}"
+
+  - name: init report
+    docker_swarm:
+        state: inspect
+    register: master
+    tags:
+       - inspect
+
+  - name: to print inspect
+    debug:
+      msg: "printing the inspect value {{ hostvars[groups['docker-swarm-master'][0]].master['swarm_facts']['JoinTokens']['Worker'] }}"
+    tags:
+      - inspectprint
