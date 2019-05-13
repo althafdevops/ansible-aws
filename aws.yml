@@ -135,7 +135,10 @@
   gather_facts: True
   
   tasks:
-
+  
+  - name: execute shell command
+    shell: hostname
+    
   - name: Init a new swarm with default parameters
     docker_swarm:
       state: present
