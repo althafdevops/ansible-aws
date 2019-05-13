@@ -1,0 +1,8 @@
+---
+  - name: configure web interface for Dockerswarm cluster
+    get_url:
+       url: https://downloads.portainer.io/portainer-agent-stack.yml
+       dest: /opt/portainer-agent-stack.yml
+
+  - name: run portainer 
+    shell: docker stack deploy --compose-file=/opt/portainer-agent-stack.yml portainer
