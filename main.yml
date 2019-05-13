@@ -21,3 +21,11 @@
   
   tasks:
   - import_tasks: dockerswarm-node-configure.yml
+
+- name: configuring dockerswarm master
+  hosts: docker-swarm-master
+  become: True
+  gather_facts: True
+  
+  tasks:  
+  - import_tasks: dockerswarm-ui.yml
