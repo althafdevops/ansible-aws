@@ -160,7 +160,7 @@
     with_items: "{{ ec2_dockerswarm_node.instances }}"  
 
 
-- name: server are provisioned in vpc
+- name: configuring docker swarm master
   hosts: docker-swarm-master
   become: True
   gather_facts: True
@@ -201,7 +201,7 @@
 
   - debug: var=swarm_node_token.stdout
 
-- name: server are provisioned in vpc
+- name: configuring docker swarm node
   hosts: docker-swarm-node
   become: True
   gather_facts: True
