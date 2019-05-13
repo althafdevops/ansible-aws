@@ -141,19 +141,22 @@
   - name: execute shell command
     shell: hostname
   
+  - user: user={{key_user}}
+    register: user_info
+  
   - name: Download the Docker installer
     get_url:
       url: https://get.docker.com/
-      dest: /root/install_docker.sh
+      dest: "{{user_info.home}}"/install_docker.sh
       mode: 0700
 
   - name: Install Docker
-    shell: /root/install_docker.sh
+    shell: "{{user_info.home}}"/install_docker.sh
     
   - name: Remove the Docker installer file.
     file:
       state: absent
-      path: /root/install_docker.sh
+      path: "{{user_info.home}}"/install_docker.sh
 
   - name: Enable the Docker daemon in systemd
     systemd:
