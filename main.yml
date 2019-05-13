@@ -12,4 +12,12 @@
   gather_facts: True
   
   tasks:   
-  - import_tasks: docker-swarm-configure.yml 
+  - import_tasks: dockerswarm-master-configure.yml 
+
+- name: configuring dockerswarm node 
+  hosts: docker-swarm-node
+  become: True
+  gather_facts: True
+  
+  tasks:
+  - import_tasks: dockerswarm-node-configure.yml
