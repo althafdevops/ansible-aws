@@ -168,6 +168,8 @@
 - name: server are provisioned in vpc
   hosts: docker-swarm-master
   gather_facts: false
+  
+  tasks:
 
   - name: Init a new swarm with default parameters
     docker_swarm:
