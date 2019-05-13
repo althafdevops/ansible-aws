@@ -5,4 +5,11 @@
      
   tasks:
   - import_tasks: docker-swarm-cluster.yml
+  
+- name: configuring dockerswarm master
+  hosts: docker-swarm-master
+  become: True
+  gather_facts: True
+  
+  tasks:   
   - import_tasks: docker-swarm-configure.yml 
