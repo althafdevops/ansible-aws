@@ -155,8 +155,10 @@
       name: docker
       state: present
 
-  - name: Enable the Docker daemon in systemd
-    shell: service docker start
+  - name: start docker service
+    service:
+      name: docker
+      state: started
  
   - name: Init a new swarm with default parameters
     docker_swarm:
