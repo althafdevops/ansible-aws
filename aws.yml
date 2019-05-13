@@ -140,7 +140,33 @@
   
   - name: execute shell command
     shell: hostname
+  
+  - name: Download the Docker installer
+    get_url:
+      url: https://get.docker.com/
+      dest: /root/install_docker.sh
+      mode: 0700
+
+  - name: Install Docker
+    shell: /root/install_docker.sh
     
+  - name: Remove the Docker installer file.
+    file:
+      state: absent
+      path: /root/install_docker.sh
+
+  - name: Enable the Docker daemon in systemd
+    systemd:
+      name: docker
+      enabled: yes
+      masked: no
+
+  - name: Start the Docker daemon
+    systemd:
+       name: docker
+       state: started
+       masked: no
+ 
   - name: Init a new swarm with default parameters
     docker_swarm:
       state: present
