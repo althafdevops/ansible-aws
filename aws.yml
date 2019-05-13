@@ -147,16 +147,16 @@
   - name: Download the Docker installer
     get_url:
       url: https://get.docker.com/
-      dest: "{{user_info.home}}"/install_docker.sh
+      dest: "{{ user_info.home }}/install_docker.sh"
       mode: 0700
 
   - name: Install Docker
-    shell: "{{user_info.home}}"/install_docker.sh
+    shell: "{{ user_info.home }}/install_docker.sh"
     
   - name: Remove the Docker installer file.
     file:
       state: absent
-      path: "{{user_info.home}}"/install_docker.sh
+      path: "{{ user_info.home }}/install_docker.sh"
 
   - name: Enable the Docker daemon in systemd
     systemd:
