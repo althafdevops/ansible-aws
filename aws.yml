@@ -14,6 +14,17 @@
      
      
   tasks:
+
+  - name: Create a new EC2 key
+    ec2_key:
+      name: {{ ec2_key_name }}
+      region: {{ ec2_region }}
+    register: ec2_key_result
+ 
+  - name: Save private key
+    copy: content="{{ ec2_key_result.key.private_key }}" dest="~/{{ ec2_key_name}}.pem" mode=0600
+    when: ec2_key_result.changed
+           
   - name: vpc is present
     ec2_vpc_net:
       state: present
@@ -153,3 +164,11 @@
       name: "{{ item.public_ip }}"
       groups: docker-swarm-master
     with_items: "{{ ec2_dockerswarm_master.instances }}"     
+
+- name: server are provisioned in vpc
+  hosts: docker-swarm-master
+  gather_facts: false
+
+  - name: Init a new swarm with default parameters
+    docker_swarm:
+      state: present
