@@ -4,7 +4,7 @@
   gather_facts: false
      
   tasks:
-  - import_tasks: docker-swarm-cluster.yml
+  - import_tasks: dockerswarm-cluster.yml
   
 - name: configuring dockerswarm master
   hosts: docker-swarm-master
