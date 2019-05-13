@@ -146,6 +146,10 @@
        name: ec2-user
     register: user_info
   
+  - name: install docker-py using pip
+    pip:
+      name: docker-py
+      
   - name: install docker using yum
     yum:
       name: docker
