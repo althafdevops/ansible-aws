@@ -1,10 +1,4 @@
 ---
-- name: start provisioning VPC 
-  hosts: localhost
-  gather_facts: false
-     
-  tasks:
-
   - name: Create a new EC2 key
     ec2_key:
       name: "{{ ec2_key_name }}"
