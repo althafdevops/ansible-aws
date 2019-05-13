@@ -1,11 +1,4 @@
 ---
-- name: configuring dockerswarm master
-  hosts: docker-swarm-master
-  become: True
-  gather_facts: True
-  
-  tasks:
-  
   - name: execute shell command
     shell: hostname
   
