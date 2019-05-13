@@ -17,8 +17,8 @@
 
   - name: Create a new EC2 key
     ec2_key:
-      name: {{ ec2_key_name }}
-      region: {{ ec2_region }}
+      name: "{{ ec2_key_name }}"
+      region: "{{ ec2_region }}"
     register: ec2_key_result
  
   - name: Save private key
