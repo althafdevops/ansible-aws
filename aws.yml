@@ -68,6 +68,10 @@
         to_port: 22
         cidr_ip: 0.0.0.0/0
       - proto: tcp
+        from_port: 2377
+        to_port: 2377
+        cidr_ip: 0.0.0.0/0  
+      - proto: tcp
         from_port: 80
         to_port: 80
         cidr_ip: 0.0.0.0/0
@@ -229,14 +233,14 @@
     with_items: "{{ groups['docker-swarm-node'] }}"  
 
   - name: join worker node to dockerswarm manager
-    shell:  docker swarm join --token "{{ hostvars['docker-swarm-master']['swarm_node_token'] }}"  "{{ }}"
+    shell:  docker swarm join --token "{{ hostvars['docker-swarm-master']['swarm_node_token'] }}"  "{{ groups['docker-swarm-master'] }}:2377"
     with_items: "{{ groups['docker-swarm-node'] }}"
 
-  - name: Add workers to docker swarm manager
-    docker_swarm:
-      state: join
-      join_token: "{{ hostvars['docker-swarm-master']['swarm_node_token']}}"
-      advertise_addr: "{{ item }}"
-      remote_addrs: "{{ groups['docker-swarm-master'] }}"
-    with_items: "{{ groups['docker-swarm-node'] }}"
+  #- name: Add workers to docker swarm manager
+  #  docker_swarm:
+  #    state: join
+  #    join_token: "{{ hostvars['docker-swarm-master']['swarm_node_token']}}"
+  #    advertise_addr: "{{ item }}"
+  #    remote_addrs: "{{ groups['docker-swarm-master'] }}"
+  #  with_items: "{{ groups['docker-swarm-node'] }}"
   
