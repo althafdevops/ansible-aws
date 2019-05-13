@@ -203,8 +203,14 @@
     docker_swarm:
         state: inspect
     register: master
+    tags:
+       - inspect
 
-  #- debug: msg="printing master inspect info - {{ hostvars['docker-swarm-master'].master['swarm_facts']['JoinTokens']['Worker'] }}"  
+  - name: to print inspect
+    debug:
+      msg: "printing the inspect value {{ hostvars[groups['docker-swarm-master'][0]].master['swarm_facts']['JoinTokens']['Worker'] }}"
+    tags:
+      - inspectprint
 
 - name: server are provisioned in vpc
   hosts: docker-swarm-node
