@@ -135,7 +135,7 @@
       image: ami-08935252a36e25f85
       wait: true
       region: "{{ ec2_region }}"
-      exact_count: 1
+      exact_count: "{{ ec2_exact_count }}"
       count_tag:
         Count: dockerswarm-node
       instance_tags:
