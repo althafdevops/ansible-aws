@@ -206,29 +206,27 @@
   become: True
   gather_facts: True
   
-  tasks:
+  tasks:     
   
   - name: execute shell command
     shell: hostname
-
-  - name: ec2
-    user:
-       name: ec2-user
-    register: user_info
   
   - name: install docker-py using pip
     pip:
       name: docker-py
+    with_items: "{{ groups['docker-swarm-node'] }}"
       
   - name: install docker using yum
     yum:
       name: docker
       state: present
+    with_items: "{{ groups['docker-swarm-node'] }}"
 
   - name: start docker service
     service:
       name: docker
       state: started 
+    with_items: "{{ groups['docker-swarm-node'] }}"  
 
   - name: join worker node to dockerswarm manager
     shell:  docker swarm join --token "{{ hostvars['docker-swarm-master']['swarm_node_token'] }}"   
